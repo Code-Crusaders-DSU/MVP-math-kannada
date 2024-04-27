@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice Question</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <style>
+
+        body {
+            background-image: url('../images/space.jpg');
+            background-size: cover;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+          }
+        /* Add your CSS styles here */
+        .question-container {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .options-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .option input[type="radio"] {
+            display: none;
+        }
+        .option {
+            margin-bottom: 40px; /* Increased spacing between options */
+            font-size: 18px;
+        }
+        
+        .option label {
+            padding: 15px 20px;
+            margin: 5px; /* Added margin to prevent transparent padding from overlapping */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .option label:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        .option input[type="radio"]:checked + label {
+            background-color: #00cc66; /* Green */
+        }
+        #submit-button, #next-button {
+            background-color: #36367d;
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        #submit-button:hover, #next-button:hover {
+            background-color: #5151a4;
+        }
+        .notification {
+            display: none;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        #next-button {
+            background-color: #ffd700; /* Yellow */
+            color: black; /* Text color */
+            transition: background-color 0.3s ease; /* Add transition for smooth color change */
+        }
+    
+        #next-button:hover {
+            background-color: #ff3333; /* Red */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="question-container" style="display: flex; justify-content: center;">
+        <div style="width: 80%; max-width: 600px; background-color: rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 10px;">
+            <h2 id="question">Which adaptation mentioned in the story is most essential for a plant to survive in the Desert habitat of Habitats Land?</h2>
+        </div>
+    </div>
+    
+    
+    <div class="options-container">
+        <div class="option">
+            <input type="radio" name="answer" value="Spiky leaves" id="option1">
+            <label for="option1">A) Spiky leaves</label>
+        </div>
+        <div class="option">
+            <input type="radio" name="answer" value="Long stems" id="option2">
+            <label for="option2">B) Long stems</label>
+        </div>
+        <div class="option">
+            <input type="radio" name="answer" value="Wide leaves" id="option3">
+            <label for="option3">C) Wide leaves</label>
+        </div>
+        <div class="option">
+            <input type="radio" name="answer" value="Retractable claws" id="option4">
+            <label for="option4">D) Retractable claws</label>
+        </div>
+    </div>
+    <button id="submit-button">Submit</button>
+    <button id="next-button">Story time</button>
+    <div class="notification" id="notification"></div>
+    <script>
+        // Add your JavaScript code here
+        const submitButton = document.getElementById('submit-button');
+        const nextButton = document.getElementById('next-button');
+        const notificationDiv = document.getElementById('notification');
+        const storyTimeButton = document.getElementById('next-button'); // Reference to the story time button
+    
+        storyTimeButton.style.display = 'none'; // Hide the story time button initially
+    
+        submitButton.addEventListener('click', () => {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+        
+            if (!selectedAnswer) {
+                notificationDiv.innerText = 'Please select an answer!';
+                notificationDiv.style.display = 'block';
+                return;
+            }
+        
+            const correctAnswer = 'Spiky leaves'; // Change this to the correct answer
+            if (selectedAnswer.value === correctAnswer) {
+                notificationDiv.innerText = 'Correct answer! Let\'s explore the topic through a story now';
+            } else {
+                notificationDiv.innerText = 'Wrong answer. Enjoy a story now!';
+            }
+        
+            notificationDiv.style.display = 'block';
+            nextButton.style.display = 'block';
+            storyTimeButton.style.display = 'inline-block'; // Show the story time button
+            storyTimeButton.classList.add('yellow-button'); // Add yellow button class
+        });
+    
+        nextButton.addEventListener('click', () => {
+            // Redirect to the story time website
+            window.location.href = "../content/Habitats.pdf";
+        });
+    </script>
+
+</body>
+</html>
